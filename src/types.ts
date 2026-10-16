@@ -15,6 +15,16 @@ export interface ItemAmount {
   amount: number;
 }
 
+/** One patch's change to an item or building, from the Satisfactory Wiki's History section. */
+export interface HistoryEntry {
+  /** Patch ID such as `1.0`, `0.3.4.6` or `Closed Alpha 3`; `unknown` when the wiki names none. */
+  patch: string;
+  /** The change, as the wiki words it (plain text); absent when the wiki gives only nested bullets. */
+  summary?: string;
+  /** Nested bullets, one per line, two spaces of indent per extra level. */
+  details?: string;
+}
+
 export interface Item {
   id: string;
   name: string;
@@ -27,6 +37,10 @@ export interface Item {
   radioactive: boolean;
   /** True for raw resources that are extracted from the world. */
   isResource: boolean;
+  /** Satisfactory Wiki categories that classify the item (for example `Crafting components`). */
+  wikiCategories?: string[];
+  /** Patch history from the Satisfactory Wiki, newest first. */
+  history?: HistoryEntry[];
 }
 
 export interface VariablePower {
@@ -104,6 +118,8 @@ export interface Building {
   pipeRate?: number;
   /** Variable-power buildings expose a nominal range; recipes override it. */
   variablePower?: VariablePower;
+  /** Patch history from the Satisfactory Wiki, newest first. */
+  history?: HistoryEntry[];
 }
 
 export type SchematicType =
@@ -131,6 +147,8 @@ export interface Schematic {
   type: SchematicType;
   /** Tech tier (0 for HUB upgrades/tutorial). */
   tier: number;
+  /** Space Elevator phase in which a milestone's tier opens (Satisfactory Wiki, "Milestones"). */
+  phase?: number;
   cost: ItemAmount[];
   timeS: number;
   unlocks: SchematicUnlocks;

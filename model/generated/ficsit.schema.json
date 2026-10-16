@@ -59,6 +59,16 @@
                         }
                     ]
                 },
+                "history": {
+                    "description": "Patch history from the Satisfactory Wiki, newest first.",
+                    "items": {
+                        "$ref": "#/$defs/HistoryEntry"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "id": {
                     "description": "The game's class name, e.g. `Desc_IronPlate_C`.",
                     "type": "string"
@@ -364,6 +374,35 @@
             "title": "GeneratorSpec",
             "type": "object"
         },
+        "HistoryEntry": {
+            "additionalProperties": false,
+            "description": "One patch's change to an item or building, as the Satisfactory Wiki's History section words it. The wiki is CC BY-NC-SA: any reuse must be non-commercial and share-alike (see NOTICE.md).",
+            "properties": {
+                "details": {
+                    "description": "Nested bullets, one per line, two spaces of indent per extra level.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "patch": {
+                    "description": "Patch ID such as `1.0`, `0.3.4.6` or `Closed Alpha 3`; `unknown` when the wiki names none.",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "The change, as the wiki words it (plain text).",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "patch"
+            ],
+            "title": "HistoryEntry",
+            "type": "object"
+        },
         "Ingredient": {
             "additionalProperties": false,
             "description": "An input to a recipe. A distinct class (not just ItemAmount) so the relational and graph views keep ingredients and products apart.",
@@ -410,6 +449,16 @@
                 "form": {
                     "$ref": "#/$defs/ItemForm"
                 },
+                "history": {
+                    "description": "Patch history from the Satisfactory Wiki, newest first.",
+                    "items": {
+                        "$ref": "#/$defs/HistoryEntry"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "id": {
                     "description": "The game's class name, e.g. `Desc_IronPlate_C`.",
                     "type": "string"
@@ -437,6 +486,16 @@
                     "description": "AWESOME Sink points per item (0 if unsinkable).",
                     "type": [
                         "integer",
+                        "null"
+                    ]
+                },
+                "wikiCategories": {
+                    "description": "Satisfactory Wiki categories that classify the item (for example `Crafting components`).",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
                         "null"
                     ]
                 }
@@ -702,6 +761,13 @@
                 "name": {
                     "type": [
                         "string",
+                        "null"
+                    ]
+                },
+                "phase": {
+                    "description": "Space Elevator phase in which this milestone's tier opens (Satisfactory Wiki, Milestones). Absent for schematics that are not tier milestones.",
+                    "type": [
+                        "integer",
                         "null"
                     ]
                 },

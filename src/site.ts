@@ -14,7 +14,7 @@ import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'no
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MODEL_DIR, ROOT, type GameData, loadGameData, loadMeta } from './graph.ts';
-import type { ItemAmount } from './types.ts';
+import type { HistoryEntry, ItemAmount } from './types.ts';
 
 export const SITE_URL = 'https://solstice035.github.io/ficsit-knowledge-model/';
 const REPO_URL = 'https://github.com/solstice035/ficsit-knowledge-model';
@@ -88,6 +88,17 @@ function recordPages(data: GameData): RecordPage[] {
   const amounts = (list: ItemAmount[] = []): string =>
     list.map((a) => `${esc(a.amount)} × ${link(a.item)}`).join('<br>') || '—';
 
+  /** Wiki patch history: one block per patch, nested bullets kept as lines. */
+  const history = (entries: HistoryEntry[] = []): string =>
+    entries
+      .map((h) => {
+        const lines = [h.summary, ...(h.details?.split('\n') ?? [])].filter(Boolean);
+        return `<strong>${esc(h.patch === 'unknown' ? 'Unknown patch' : `Patch ${h.patch}`)}</strong> ${lines
+          .map((l) => esc(l).replace(/^( +)/, (m) => '&nbsp;'.repeat(m.length)))
+          .join('<br>')}`;
+      })
+      .join('<br><br>') || '—';
+
   // Backlinks: which recipes make and use each item.
   const madeBy = new Map<string, string[]>();
   const usedIn = new Map<string, string[]>();
@@ -121,8 +132,10 @@ function recordPages(data: GameData): RecordPage[] {
         ['Sink points', esc(i.sinkPoints)],
         ['Energy (MJ)', esc(i.energyMJ)],
         ['Raw resource', i.isResource ? 'yes' : 'no'],
+        ['Wiki categories', esc((i.wikiCategories ?? []).join(', ')) || '—'],
         ['Made by', links(madeBy.get(i.id))],
         ['Used in', links(usedIn.get(i.id))],
+        ['History', history(i.history)],
         ['Sources', links(i.derivedFrom)],
       ],
     });
@@ -156,6 +169,7 @@ function recordPages(data: GameData): RecordPage[] {
           b.footprint ? esc(`${b.footprint.w} × ${b.footprint.l} × ${b.footprint.h}`) : '—',
         ],
         ['Build cost', amounts(b.buildCost)],
+        ['History', history(b.history)],
         ['Sources', links(b.derivedFrom)],
       ],
     });
@@ -168,6 +182,7 @@ function recordPages(data: GameData): RecordPage[] {
       rows: [
         ['Type', esc(s.type)],
         ['Tier', esc(s.tier)],
+        ['Phase', s.phase === undefined ? '—' : esc(s.phase)],
         ['Cost', amounts(s.cost)],
         ['Unlocks recipes', links(s.unlocks.recipes)],
         ['Depends on', links(s.dependsOn)],

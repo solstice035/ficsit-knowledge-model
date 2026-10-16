@@ -76,6 +76,9 @@
       "description": {
          "@id": "schema:description"
       },
+      "details": {
+         "@id": "details"
+      },
       "durationS": {
          "@type": "xsd:double",
          "@id": "durationS"
@@ -115,6 +118,10 @@
       "handcraft": {
          "@type": "xsd:boolean",
          "@id": "handcraft"
+      },
+      "history": {
+         "@type": "@id",
+         "@id": "history"
       },
       "id": "@id",
       "ingredients": {
@@ -157,6 +164,13 @@
       },
       "name": {
          "@id": "schema:name"
+      },
+      "patch": {
+         "@id": "patch"
+      },
+      "phase": {
+         "@type": "xsd:integer",
+         "@id": "phase"
       },
       "pipeRate": {
          "@type": "xsd:double",
@@ -232,6 +246,9 @@
          "@type": "@id",
          "@id": "sources"
       },
+      "summary": {
+         "@id": "summary"
+      },
       "supplemental": {
          "@type": "@id",
          "@id": "supplemental"
@@ -271,6 +288,9 @@
          "@type": "xsd:double",
          "@id": "w"
       },
+      "wikiCategories": {
+         "@id": "wikiCategories"
+      },
       "workshop": {
          "@type": "xsd:boolean",
          "@id": "workshop"
@@ -307,6 +327,9 @@
       },
       "GeneratorSpec": {
          "@id": "GeneratorSpec"
+      },
+      "HistoryEntry": {
+         "@id": "HistoryEntry"
       },
       "Ingredient": {
          "@id": "Ingredient"

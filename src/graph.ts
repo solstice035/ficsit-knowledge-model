@@ -19,6 +19,7 @@ import { DATA_NS, VOCAB_NS } from './ns.ts';
 import type {
   Building,
   GameData,
+  HistoryEntry,
   Collectible,
   DataMeta,
   Item,
@@ -92,9 +93,16 @@ export function buildSqlite(data: GameData, path = ':memory:'): DatabaseSync {
 
   db.exec('BEGIN');
   for (const s of data.sources) insert('Source', { ...s });
-  for (const { derivedFrom: sources, ...i } of data.items) {
+  /** Rows for a record's wiki history (`HistoryEntry` has one owner column per class). */
+  const history = (owner: Record<string, string>, entries: HistoryEntry[] = []) => {
+    for (const e of entries) insert('HistoryEntry', { ...e, ...owner });
+  };
+  for (const { derivedFrom: sources, history: entries, wikiCategories, ...i } of data.items) {
     insert('Item', i);
     derivedFrom('Item', i.id, sources);
+    for (const c of wikiCategories ?? [])
+      insert('Item_wikiCategories', { Item_id: i.id, wikiCategories: c });
+    history({ Item_id: i.id }, entries);
   }
   for (const r of data.recipes) {
     insert('Recipe', {
@@ -150,6 +158,7 @@ export function buildSqlite(data: GameData, path = ':memory:'): DatabaseSync {
     });
     derivedFrom('Building', b.id, b.derivedFrom);
     amounts('ItemAmount', { Building_id: b.id }, b.buildCost);
+    history({ Building_id: b.id }, b.history);
   }
   for (const s of data.schematics) {
     const u = s.unlocks;
@@ -179,6 +188,7 @@ export function buildSqlite(data: GameData, path = ':memory:'): DatabaseSync {
       name: s.name,
       type: s.type,
       tier: s.tier,
+      phase: s.phase,
       timeS: s.timeS,
       mamTree: s.mamTree,
       unlocks_id: unlocksId,
@@ -241,7 +251,7 @@ export function toJsonLd(data: GameData): object {
     '@context'
   ];
   const graph = [
-    ...data.items.map((x) => typed('Item', x)),
+    ...data.items.map((x) => typed('Item', x, { history: 'HistoryEntry' })),
     ...data.recipes.map((x) =>
       typed('Recipe', x, {
         ingredients: 'Ingredient',
@@ -263,6 +273,7 @@ export function toJsonLd(data: GameData): object {
           extractor: 'ExtractorSpec',
           generator: 'GeneratorSpec',
           variablePower: 'VariablePower',
+          history: 'HistoryEntry',
         },
       );
     }),

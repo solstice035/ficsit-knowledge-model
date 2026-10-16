@@ -156,20 +156,39 @@ has a required `derivedFrom` list naming the sources its facts come from
 (`prov:wasDerivedFrom` in RDF, `<Class>_derivedFrom` tables in SQLite). Each
 `Source` has an ID, a name, a pinned URL, a licence and a retrieval date.
 
-| Source ID                     | Cited by                                                      |
-| ----------------------------- | ------------------------------------------------------------- |
-| `source-docs-en`              | Items, recipes, buildings, schematics                         |
-| `source-factory-buildings`    | Buildings with a clearance box (`footprint`)                  |
-| `source-world-resource-nodes` | Resource nodes, wells and geysers                             |
-| `source-world-collectibles`   | Collectibles                                                  |
-| `source-satisfactory-wiki`    | Hard Drive and FICSIT Coupon items; the Smelter's sloop slots |
+| Source ID                     | Cited by                                                                                                         |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `source-docs-en`              | Items, recipes, buildings, schematics                                                                            |
+| `source-factory-buildings`    | Buildings with a clearance box (`footprint`)                                                                     |
+| `source-world-resource-nodes` | Resource nodes, wells and geysers                                                                                |
+| `source-world-collectibles`   | Collectibles                                                                                                     |
+| `source-satisfactory-wiki`    | Hard Drive and FICSIT Coupon items; the Smelter's sloop slots; item `wikiCategories` (the live category listing) |
+| `source-wiki-r<revid>`        | One per wiki page: `history` on items and buildings, `phase` on milestones. The URL is an `oldid` permalink      |
 
 The data pipeline writes `derivedFrom` on every record as it builds
 `data/generated/`, and lists the cited sources in `meta.json`. File sources are
 pinned to a commit SHA and their bytes to a SHA-256 in `data/sources.lock.json`.
 `retrievedAt` is the pinned `RETRIEVED_AT` date in `src/pipeline/sources.ts`.
 
-Wiki facts still point at the wiki itself, not at a pinned page revision.
+Wiki facts that come from a page are pinned to its revision: `npm run data:wiki`
+reads the wiki and writes `data/wiki/snapshot.json` (page, revision, infobox
+class names, categories, History section, tier phases and milestone tables),
+and `data:build` reads only that committed snapshot, so a rebuild needs no
+network. Facts from the wiki's live category listing and the hand-entered
+items still cite `source-satisfactory-wiki`, which is not pinned.
+
+## Wiki-derived fields
+
+| Field            | On             | Meaning                                                                                              |
+| ---------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
+| `history`        | Item, Building | Patch-by-patch changes (`patch`, `summary`, `details`) from the page's History section, newest first |
+| `wikiCategories` | Item           | Classifying wiki categories such as `Crafting components`, `Fuels` or `Project Assembly parts`       |
+| `phase`          | Schematic      | Space Elevator phase that opens a milestone's tier (Milestones page)                                 |
+
+These are CC BY-NC-SA: any reuse must be non-commercial and share-alike
+(query Q6 lists every record that carries them). `data:verify` also checks all
+42 tier 1-9 milestones against the wiki's tables: names, costs and research
+times agree.
 
 ## Known data gaps
 

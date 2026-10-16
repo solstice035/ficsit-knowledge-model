@@ -9,695 +9,743 @@
 ficsit:Building a sh:NodeShape ;
 	rdfs:comment "A factory, extractor, generator or logistics building (`Build_*_C`)." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n98 ;
-	sh:property _:c14n109 , _:c14n112 , _:c14n125 , _:c14n133 , _:c14n134 , _:c14n15 , _:c14n17 , _:c14n25 , _:c14n31 , _:c14n35 , _:c14n43 , _:c14n61 , _:c14n64 , _:c14n95 ;
+	sh:ignoredProperties _:c14n105 ;
+	sh:property _:c14n101 , _:c14n116 , _:c14n119 , _:c14n132 , _:c14n141 , _:c14n142 , _:c14n18 , _:c14n21 , _:c14n28 , _:c14n34 , _:c14n38 , _:c14n40 , _:c14n64 , _:c14n66 , _:c14n70 ;
 	sh:targetClass ficsit:Building .
 ficsit:Collectible a sh:NodeShape ;
 	rdfs:comment "A Mercer Sphere, Somersloop, Hard Drive crash site or Power Slug." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n45 ;
-	sh:property _:c14n115 , _:c14n13 , _:c14n23 , _:c14n37 , _:c14n53 , _:c14n58 , _:c14n79 ;
+	sh:ignoredProperties _:c14n48 ;
+	sh:property _:c14n122 , _:c14n16 , _:c14n26 , _:c14n41 , _:c14n57 , _:c14n62 , _:c14n84 ;
 	sh:targetClass ficsit:Collectible .
 ficsit:ExtractorSpec a sh:NodeShape ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n126 ;
-	sh:property _:c14n4 , _:c14n44 ;
+	sh:ignoredProperties _:c14n133 ;
+	sh:property _:c14n3 , _:c14n47 ;
 	sh:targetClass ficsit:ExtractorSpec .
 ficsit:Footprint a sh:NodeShape ;
 	rdfs:comment "Clearance box in metres." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n12 ;
-	sh:property _:c14n113 , _:c14n30 , _:c14n54 ;
+	sh:ignoredProperties _:c14n15 ;
+	sh:property _:c14n120 , _:c14n33 , _:c14n58 ;
 	sh:targetClass ficsit:Footprint .
 ficsit:GameData a sh:NodeShape ;
 	rdfs:comment "Container for one generated game-data bundle." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n34 ;
-	sh:property _:c14n10 , _:c14n119 , _:c14n127 , _:c14n130 , _:c14n2 , _:c14n29 , _:c14n83 ;
+	sh:ignoredProperties _:c14n37 ;
+	sh:property _:c14n1 , _:c14n126 , _:c14n13 , _:c14n134 , _:c14n138 , _:c14n32 , _:c14n88 ;
 	sh:targetClass ficsit:GameData .
 ficsit:GeneratorFuel a sh:NodeShape ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n100 ;
-	sh:property _:c14n20 , _:c14n78 , _:c14n92 ;
+	sh:ignoredProperties _:c14n106 ;
+	sh:property _:c14n23 , _:c14n83 , _:c14n98 ;
 	sh:targetClass ficsit:GeneratorFuel .
 ficsit:GeneratorSpec a sh:NodeShape ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n73 ;
-	sh:property _:c14n110 , _:c14n66 , _:c14n71 ;
+	sh:ignoredProperties _:c14n78 ;
+	sh:property _:c14n117 , _:c14n72 , _:c14n76 ;
 	sh:targetClass ficsit:GeneratorSpec .
+ficsit:HistoryEntry a sh:NodeShape ;
+	rdfs:comment "One patch's change to an item or building, as the Satisfactory Wiki's History section words it. The wiki is CC BY-NC-SA: any reuse must be non-commercial and share-alike (see NOTICE.md)." ;
+	sh:closed true ;
+	sh:ignoredProperties _:c14n46 ;
+	sh:property _:c14n108 , _:c14n55 , _:c14n7 ;
+	sh:targetClass ficsit:HistoryEntry .
 ficsit:Ingredient a sh:NodeShape ;
 	rdfs:comment "An input to a recipe. A distinct class (not just ItemAmount) so the relational and graph views keep ingredients and products apart." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n102 ;
-	sh:property _:c14n111 , _:c14n141 ;
+	sh:ignoredProperties _:c14n109 ;
+	sh:property _:c14n118 , _:c14n149 ;
 	sh:targetClass ficsit:Ingredient .
 ficsit:Item a sh:NodeShape ;
 	rdfs:comment "An item, fluid or gas (`Desc_*_C`)." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n116 ;
-	sh:property _:c14n24 , _:c14n46 , _:c14n48 , _:c14n49 , _:c14n6 , _:c14n7 , _:c14n70 , _:c14n76 , _:c14n80 ;
+	sh:ignoredProperties _:c14n123 ;
+	sh:property _:c14n11 , _:c14n135 , _:c14n20 , _:c14n27 , _:c14n49 , _:c14n5 , _:c14n51 , _:c14n52 , _:c14n6 , _:c14n75 , _:c14n81 ;
 	sh:targetClass ficsit:Item .
 ficsit:ItemAmount a sh:NodeShape ;
 	rdfs:comment "A quantity of one item, used for ingredients, products and costs." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n135 ;
-	sh:property _:c14n5 , _:c14n89 ;
+	sh:ignoredProperties _:c14n143 ;
+	sh:property _:c14n4 , _:c14n94 ;
 	sh:targetClass ficsit:ItemAmount .
 ficsit:Product a sh:NodeShape ;
 	rdfs:comment "An output of a recipe." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n62 ;
-	sh:property _:c14n139 , _:c14n69 ;
+	sh:ignoredProperties _:c14n67 ;
+	sh:property _:c14n147 , _:c14n74 ;
 	sh:targetClass ficsit:Product .
 ficsit:Recipe a sh:NodeShape ;
 	rdfs:comment "A recipe (`Recipe_*_C`). Fluid amounts are in m³." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n59 ;
-	sh:property _:c14n103 , _:c14n107 , _:c14n131 , _:c14n14 , _:c14n50 , _:c14n72 , _:c14n74 , _:c14n81 , _:c14n85 , _:c14n87 , _:c14n93 , _:c14n96 ;
+	sh:ignoredProperties _:c14n63 ;
+	sh:property _:c14n103 , _:c14n110 , _:c14n114 , _:c14n139 , _:c14n17 , _:c14n53 , _:c14n77 , _:c14n79 , _:c14n85 , _:c14n90 , _:c14n93 , _:c14n99 ;
 	sh:targetClass ficsit:Recipe .
 ficsit:ResourceNode a sh:NodeShape ;
 	rdfs:comment "A resource node, well or geyser in the world. `resource` is an item ID, or `geothermal` for geysers." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n3 ;
-	sh:property _:c14n0 , _:c14n114 , _:c14n138 , _:c14n36 , _:c14n56 , _:c14n63 , _:c14n65 , _:c14n94 ;
+	sh:ignoredProperties _:c14n2 ;
+	sh:property _:c14n0 , _:c14n100 , _:c14n121 , _:c14n146 , _:c14n39 , _:c14n60 , _:c14n68 , _:c14n71 ;
 	sh:targetClass ficsit:ResourceNode .
 ficsit:Schematic a sh:NodeShape ;
 	rdfs:comment "A milestone, MAM node, alternate or other unlock (`Schematic_*_C`)." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n129 ;
-	sh:property _:c14n1 , _:c14n132 , _:c14n18 , _:c14n33 , _:c14n41 , _:c14n67 , _:c14n84 , _:c14n88 , _:c14n91 , _:c14n99 ;
+	sh:ignoredProperties _:c14n137 ;
+	sh:property _:c14n10 , _:c14n102 , _:c14n140 , _:c14n36 , _:c14n69 , _:c14n8 , _:c14n87 , _:c14n89 , _:c14n92 , _:c14n96 , _:c14n97 ;
 	sh:targetClass ficsit:Schematic .
 ficsit:SchematicUnlocks a sh:NodeShape ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n47 ;
-	sh:property _:c14n101 , _:c14n123 , _:c14n137 , _:c14n22 , _:c14n32 , _:c14n86 ;
+	sh:ignoredProperties _:c14n50 ;
+	sh:property _:c14n107 , _:c14n130 , _:c14n145 , _:c14n25 , _:c14n35 , _:c14n91 ;
 	sh:targetClass ficsit:SchematicUnlocks .
 ficsit:Source a sh:NodeShape ;
 	rdfs:comment "A pinned upstream source that records are derived from. The URL pins an exact revision, so the content behind it does not change." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n39 ;
-	sh:property _:c14n108 , _:c14n40 , _:c14n51 , _:c14n55 , _:c14n57 ;
+	sh:ignoredProperties _:c14n43 ;
+	sh:property _:c14n115 , _:c14n44 , _:c14n54 , _:c14n59 , _:c14n61 ;
 	sh:targetClass ficsit:Source .
 ficsit:VariablePower a sh:NodeShape ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n82 ;
-	sh:property _:c14n104 , _:c14n105 ;
+	sh:ignoredProperties _:c14n86 ;
+	sh:property _:c14n111 , _:c14n112 ;
 	sh:targetClass ficsit:VariablePower .
 _:c14n0 sh:description "Kind of schematic, node or collectible (range set per class)." ;
-	sh:in _:c14n42 ;
+	sh:in _:c14n45 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 3 ;
 	sh:path ficsit:type .
-_:c14n1 sh:datatype xsd:double ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 5 ;
-	sh:path ficsit:timeS .
-_:c14n10 sh:class ficsit:Building ;
+_:c14n1 sh:class ficsit:Recipe ;
 	sh:nodeKind sh:IRI ;
-	sh:order 2 ;
-	sh:path ficsit:buildings .
-_:c14n100 rdf:first rdf:type ;
+	sh:order 1 ;
+	sh:path ficsit:recipes .
+_:c14n10 sh:class ficsit:Schematic ;
+	sh:nodeKind sh:IRI ;
+	sh:order 8 ;
+	sh:path ficsit:dependsOn .
+_:c14n100 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:IRI ;
+	sh:order 0 ;
+	sh:path ficsit:id .
+_:c14n101 sh:class ficsit:GeneratorSpec ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 9 ;
+	sh:path ficsit:generator .
+_:c14n102 sh:class ficsit:Source ;
+	sh:description "Sources this record's facts come from." ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:IRI ;
+	sh:order 10 ;
+	sh:path prov:wasDerivedFrom .
+_:c14n103 sh:class ficsit:Product ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 5 ;
+	sh:path ficsit:products .
+_:c14n104 rdf:first "mercerSphere" ;
+	rdf:rest _:c14n24 .
+_:c14n105 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n101 sh:class ficsit:Schematic ;
+_:c14n106 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n107 sh:class ficsit:Schematic ;
 	sh:description "Schematics this schematic unlocks (references)." ;
 	sh:nodeKind sh:IRI ;
 	sh:order 1 ;
 	sh:path ficsit:schematics .
-_:c14n102 rdf:first rdf:type ;
+_:c14n108 sh:datatype xsd:string ;
+	sh:description "The change, as the wiki words it (plain text)." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path ficsit:summary .
+_:c14n109 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n103 sh:datatype xsd:boolean ;
+_:c14n11 sh:datatype xsd:string ;
+	sh:description "Satisfactory Wiki categories that classify the item (for example `Crafting components`)." ;
+	sh:nodeKind sh:Literal ;
+	sh:order 8 ;
+	sh:path ficsit:wikiCategories .
+_:c14n110 sh:datatype xsd:boolean ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path ficsit:alternate .
-_:c14n104 sh:datatype xsd:double ;
+_:c14n111 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path ficsit:minMW .
-_:c14n105 sh:datatype xsd:double ;
+_:c14n112 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path ficsit:maxMW .
-_:c14n106 rdf:first "resource-sink" ;
-	rdf:rest _:c14n27 .
-_:c14n107 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
+_:c14n113 rdf:first "resource-sink" ;
+	rdf:rest _:c14n30 .
+_:c14n114 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:id .
-_:c14n108 sh:datatype xsd:date ;
+_:c14n115 sh:datatype xsd:date ;
 	sh:description "Date the input bundle was built from this source." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path ficsit:retrievedAt .
-_:c14n109 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
+_:c14n116 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:id .
-_:c14n11 rdf:first "hardDrive" ;
-	rdf:rest _:c14n90 .
-_:c14n110 sh:datatype xsd:double ;
+_:c14n117 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path ficsit:supplementalPerMW .
-_:c14n111 sh:class ficsit:Item ;
+_:c14n118 sh:class ficsit:Item ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:item .
-_:c14n112 sh:datatype xsd:string ;
+_:c14n119 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path schema1:name .
-_:c14n113 sh:datatype xsd:double ;
+_:c14n12 rdf:first "alternate" ;
+	rdf:rest _:c14n128 .
+_:c14n120 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path ficsit:w .
-_:c14n114 sh:datatype xsd:double ;
+_:c14n121 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path ficsit:x .
-_:c14n115 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
+_:c14n122 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:id .
-_:c14n116 rdf:first rdf:type ;
+_:c14n123 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n117 rdf:first "liquid" ;
-	rdf:rest _:c14n124 .
-_:c14n118 rdf:first "milestone" ;
-	rdf:rest _:c14n120 .
-_:c14n119 sh:class ficsit:Schematic ;
+_:c14n124 rdf:first "liquid" ;
+	rdf:rest _:c14n131 .
+_:c14n125 rdf:first "milestone" ;
+	rdf:rest _:c14n127 .
+_:c14n126 sh:class ficsit:Schematic ;
 	sh:nodeKind sh:IRI ;
 	sh:order 3 ;
 	sh:path ficsit:schematics .
-_:c14n12 rdf:first rdf:type ;
+_:c14n127 rdf:first "mam" ;
+	rdf:rest _:c14n12 .
+_:c14n128 rdf:first "hard-drive" ;
+	rdf:rest _:c14n113 .
+_:c14n129 rdf:first "slugPurple" ;
 	rdf:rest rdf:nil .
-_:c14n120 rdf:first "mam" ;
-	rdf:rest _:c14n9 .
-_:c14n121 rdf:first "hard-drive" ;
-	rdf:rest _:c14n106 .
-_:c14n122 rdf:first "slugPurple" ;
-	rdf:rest rdf:nil .
-_:c14n123 sh:class ficsit:Recipe ;
+_:c14n13 sh:class ficsit:Building ;
+	sh:nodeKind sh:IRI ;
+	sh:order 2 ;
+	sh:path ficsit:buildings .
+_:c14n130 sh:class ficsit:Recipe ;
 	sh:description "Recipes this schematic unlocks (references)." ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:recipes .
-_:c14n124 rdf:first "gas" ;
+_:c14n131 rdf:first "gas" ;
 	rdf:rest rdf:nil .
-_:c14n125 sh:datatype xsd:integer ;
+_:c14n132 sh:datatype xsd:integer ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 5 ;
 	sh:path ficsit:sloopSlots .
-_:c14n126 rdf:first rdf:type ;
+_:c14n133 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n127 sh:class ficsit:Source ;
+_:c14n134 sh:class ficsit:Source ;
 	sh:nodeKind sh:IRI ;
 	sh:order 6 ;
 	sh:path ficsit:sources .
-_:c14n128 rdf:first "logistics" ;
+_:c14n135 sh:class ficsit:HistoryEntry ;
+	sh:description "Patch history from the Satisfactory Wiki, newest first." ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 9 ;
+	sh:path ficsit:history .
+_:c14n136 rdf:first "logistics" ;
 	rdf:rest rdf:nil .
-_:c14n129 rdf:first rdf:type ;
+_:c14n137 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n13 sh:datatype xsd:double ;
-	sh:maxCount 1 ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 4 ;
-	sh:path ficsit:z .
-_:c14n130 sh:class ficsit:Item ;
+_:c14n138 sh:class ficsit:Item ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:items .
-_:c14n131 sh:class ficsit:Building ;
+_:c14n139 sh:class ficsit:Building ;
 	sh:description "Factory buildings that can run this recipe." ;
 	sh:nodeKind sh:IRI ;
 	sh:order 6 ;
 	sh:path ficsit:producedIn .
-_:c14n132 sh:datatype xsd:integer ;
+_:c14n14 rdf:first "hardDrive" ;
+	rdf:rest _:c14n95 .
+_:c14n140 sh:datatype xsd:integer ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path ficsit:tier .
-_:c14n133 sh:datatype xsd:double ;
+_:c14n141 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path ficsit:powerMW .
-_:c14n134 sh:class ficsit:VariablePower ;
+_:c14n142 sh:class ficsit:VariablePower ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 12 ;
 	sh:path ficsit:variablePower .
-_:c14n135 rdf:first rdf:type ;
+_:c14n143 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n136 rdf:first "geyser" ;
+_:c14n144 rdf:first "geyser" ;
 	rdf:rest rdf:nil .
-_:c14n137 sh:datatype xsd:string ;
+_:c14n145 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path ficsit:scannerObjects .
-_:c14n138 sh:class ficsit:Item ;
+_:c14n146 sh:class ficsit:Item ;
 	sh:description "Item ID of the resource, or `geothermal` for geysers." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 1 ;
 	sh:path ficsit:resource .
-_:c14n139 sh:class ficsit:Item ;
+_:c14n147 sh:class ficsit:Item ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:item .
-_:c14n14 sh:class ficsit:Source ;
-	sh:description "Sources this record's facts come from." ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:IRI ;
-	sh:order 11 ;
-	sh:path prov:wasDerivedFrom .
-_:c14n140 rdf:first "well-core" ;
-	rdf:rest _:c14n16 .
-_:c14n141 sh:datatype xsd:double ;
+_:c14n148 rdf:first "well-core" ;
+	rdf:rest _:c14n19 .
+_:c14n149 sh:datatype xsd:double ;
 	sh:description "Item count, or m³ for fluids." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path ficsit:amount .
-_:c14n15 sh:datatype xsd:double ;
+_:c14n15 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n16 sh:datatype xsd:double ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 4 ;
+	sh:path ficsit:z .
+_:c14n17 sh:class ficsit:Source ;
+	sh:description "Sources this record's facts come from." ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:IRI ;
+	sh:order 11 ;
+	sh:path prov:wasDerivedFrom .
+_:c14n18 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 11 ;
 	sh:path ficsit:pipeRate .
-_:c14n16 rdf:first "well-satellite" ;
-	rdf:rest _:c14n136 .
-_:c14n17 sh:in _:c14n8 ;
+_:c14n19 rdf:first "well-satellite" ;
+	rdf:rest _:c14n144 .
+_:c14n2 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n20 sh:class ficsit:Source ;
+	sh:description "Sources this record's facts come from." ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:IRI ;
+	sh:order 10 ;
+	sh:path prov:wasDerivedFrom .
+_:c14n21 sh:in _:c14n9 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 2 ;
 	sh:path ficsit:category .
-_:c14n18 sh:class ficsit:ItemAmount ;
-	sh:nodeKind sh:BlankNodeOrIRI ;
-	sh:order 4 ;
-	sh:path ficsit:cost .
-_:c14n19 rdf:first "impure" ;
-	rdf:rest _:c14n38 .
-_:c14n2 sh:class ficsit:Recipe ;
-	sh:nodeKind sh:IRI ;
-	sh:order 1 ;
-	sh:path ficsit:recipes .
-_:c14n20 sh:class ficsit:Item ;
+_:c14n22 rdf:first "impure" ;
+	rdf:rest _:c14n42 .
+_:c14n23 sh:class ficsit:Item ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 1 ;
 	sh:path ficsit:supplemental .
-_:c14n21 rdf:first "somersloop" ;
-	rdf:rest _:c14n11 .
-_:c14n22 sh:datatype xsd:integer ;
+_:c14n24 rdf:first "somersloop" ;
+	rdf:rest _:c14n14 .
+_:c14n25 sh:datatype xsd:integer ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path ficsit:inventorySlots .
-_:c14n23 sh:class ficsit:ItemAmount ;
+_:c14n26 sh:class ficsit:ItemAmount ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 5 ;
 	sh:path ficsit:unlockCost .
-_:c14n24 sh:datatype xsd:string ;
+_:c14n27 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path schema1:name .
-_:c14n25 sh:class ficsit:Footprint ;
+_:c14n28 sh:class ficsit:Footprint ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 6 ;
 	sh:path ficsit:footprint .
-_:c14n26 rdf:first "extractor" ;
-	rdf:rest _:c14n77 .
-_:c14n27 rdf:first "custom" ;
-	rdf:rest _:c14n60 .
-_:c14n28 rdf:first "tutorial" ;
-	rdf:rest _:c14n118 .
-_:c14n29 sh:class ficsit:ResourceNode ;
+_:c14n29 rdf:first "extractor" ;
+	rdf:rest _:c14n82 .
+_:c14n3 sh:class ficsit:Item ;
+	sh:nodeKind sh:IRI ;
+	sh:order 1 ;
+	sh:path ficsit:resources .
+_:c14n30 rdf:first "custom" ;
+	rdf:rest _:c14n65 .
+_:c14n31 rdf:first "tutorial" ;
+	rdf:rest _:c14n125 .
+_:c14n32 sh:class ficsit:ResourceNode ;
 	sh:nodeKind sh:IRI ;
 	sh:order 4 ;
 	sh:path ficsit:resourceNodes .
-_:c14n3 rdf:first rdf:type ;
-	rdf:rest rdf:nil .
-_:c14n30 sh:datatype xsd:double ;
+_:c14n33 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path ficsit:h .
-_:c14n31 sh:class ficsit:ItemAmount ;
+_:c14n34 sh:class ficsit:ItemAmount ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 7 ;
 	sh:path ficsit:buildCost .
-_:c14n32 sh:datatype xsd:string ;
+_:c14n35 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path ficsit:scannerResources .
-_:c14n33 sh:description "Kind of schematic, node or collectible (range set per class)." ;
-	sh:in _:c14n28 ;
+_:c14n36 sh:description "Kind of schematic, node or collectible (range set per class)." ;
+	sh:in _:c14n31 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 2 ;
 	sh:path ficsit:type .
-_:c14n34 rdf:first rdf:type ;
+_:c14n37 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n35 sh:class ficsit:ExtractorSpec ;
+_:c14n38 sh:class ficsit:ExtractorSpec ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 8 ;
 	sh:path ficsit:extractor .
-_:c14n36 sh:in _:c14n19 ;
+_:c14n39 sh:in _:c14n22 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 2 ;
 	sh:path ficsit:purity .
-_:c14n37 sh:datatype xsd:double ;
+_:c14n4 sh:datatype xsd:double ;
+	sh:description "Item count, or m³ for fluids." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path ficsit:amount .
+_:c14n40 sh:class ficsit:HistoryEntry ;
+	sh:description "Patch history from the Satisfactory Wiki, newest first." ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 13 ;
+	sh:path ficsit:history .
+_:c14n41 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path ficsit:y .
-_:c14n38 rdf:first "normal" ;
-	rdf:rest _:c14n75 .
-_:c14n39 rdf:first rdf:type ;
+_:c14n42 rdf:first "normal" ;
+	rdf:rest _:c14n80 .
+_:c14n43 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n4 sh:class ficsit:Item ;
-	sh:nodeKind sh:IRI ;
-	sh:order 1 ;
-	sh:path ficsit:resources .
-_:c14n40 sh:description "Pinned URL of the source (a commit-pinned file, or a wiki page)." ;
+_:c14n44 sh:description "Pinned URL of the source (a commit-pinned file, or a wiki page)." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 2 ;
 	sh:path schema1:url .
-_:c14n41 sh:class ficsit:SchematicUnlocks ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:BlankNodeOrIRI ;
-	sh:order 6 ;
-	sh:path ficsit:unlocks .
-_:c14n42 rdf:first "node" ;
-	rdf:rest _:c14n140 .
-_:c14n43 sh:class ficsit:Source ;
-	sh:description "Sources this record's facts come from." ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:IRI ;
-	sh:order 13 ;
-	sh:path prov:wasDerivedFrom .
-_:c14n44 sh:datatype xsd:double ;
+_:c14n45 rdf:first "node" ;
+	rdf:rest _:c14n148 .
+_:c14n46 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n47 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path ficsit:baseRatePerMin .
-_:c14n45 rdf:first rdf:type ;
+_:c14n48 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n46 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
+_:c14n49 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:id .
-_:c14n47 rdf:first rdf:type ;
+_:c14n5 sh:in _:c14n56 ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:order 3 ;
+	sh:path ficsit:form .
+_:c14n50 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n48 sh:datatype xsd:boolean ;
+_:c14n51 sh:datatype xsd:boolean ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 6 ;
 	sh:path ficsit:radioactive .
-_:c14n49 sh:datatype xsd:string ;
+_:c14n52 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path schema1:description .
-_:c14n5 sh:datatype xsd:double ;
-	sh:description "Item count, or m³ for fluids." ;
-	sh:maxCount 1 ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 1 ;
-	sh:path ficsit:amount .
-_:c14n50 sh:class ficsit:Ingredient ;
+_:c14n53 sh:class ficsit:Ingredient ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 4 ;
 	sh:path ficsit:ingredients .
-_:c14n51 sh:datatype xsd:string ;
+_:c14n54 sh:datatype xsd:string ;
 	sh:description "Licence of the source, as stated by its publisher." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path dcterms:license .
-_:c14n52 rdf:first "solid" ;
-	rdf:rest _:c14n117 .
-_:c14n53 sh:description "Kind of schematic, node or collectible (range set per class)." ;
-	sh:in _:c14n97 ;
+_:c14n55 sh:datatype xsd:string ;
+	sh:description "Nested bullets, one per line, two spaces of indent per extra level." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 2 ;
+	sh:path ficsit:details .
+_:c14n56 rdf:first "solid" ;
+	rdf:rest _:c14n124 .
+_:c14n57 sh:description "Kind of schematic, node or collectible (range set per class)." ;
+	sh:in _:c14n104 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 1 ;
 	sh:path ficsit:type .
-_:c14n54 sh:datatype xsd:double ;
+_:c14n58 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path ficsit:l .
-_:c14n55 sh:datatype xsd:string ;
+_:c14n59 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path schema1:name .
-_:c14n56 sh:class ficsit:Source ;
+_:c14n6 sh:datatype xsd:double ;
+	sh:description "Energy per item, or per m³ for fluids (0 if not a fuel)." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 5 ;
+	sh:path ficsit:energyMJ .
+_:c14n60 sh:class ficsit:Source ;
 	sh:description "Sources this record's facts come from." ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 7 ;
 	sh:path prov:wasDerivedFrom .
-_:c14n57 sh:description "Stable source ID, e.g. `source-docs-en`." ;
+_:c14n61 sh:description "Stable source ID, e.g. `source-docs-en`." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:id .
-_:c14n58 sh:class ficsit:Source ;
+_:c14n62 sh:class ficsit:Source ;
 	sh:description "Sources this record's facts come from." ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 6 ;
 	sh:path prov:wasDerivedFrom .
-_:c14n59 rdf:first rdf:type ;
+_:c14n63 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n6 sh:in _:c14n52 ;
-	sh:maxCount 1 ;
+_:c14n64 sh:class ficsit:Source ;
+	sh:description "Sources this record's facts come from." ;
 	sh:minCount 1 ;
-	sh:order 3 ;
-	sh:path ficsit:form .
-_:c14n60 rdf:first "customization" ;
+	sh:nodeKind sh:IRI ;
+	sh:order 14 ;
+	sh:path prov:wasDerivedFrom .
+_:c14n65 rdf:first "customization" ;
 	rdf:rest rdf:nil .
-_:c14n61 sh:datatype xsd:double ;
+_:c14n66 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path ficsit:powerExponent .
-_:c14n62 rdf:first rdf:type ;
+_:c14n67 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n63 sh:datatype xsd:double ;
+_:c14n68 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 6 ;
 	sh:path ficsit:z .
-_:c14n64 sh:datatype xsd:double ;
+_:c14n69 sh:class ficsit:SchematicUnlocks ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 7 ;
+	sh:path ficsit:unlocks .
+_:c14n7 sh:datatype xsd:string ;
+	sh:description "Patch ID such as `1.0`, `0.3.4.6` or `Closed Alpha 3`; `unknown` when the wiki names none." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path ficsit:patch .
+_:c14n70 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 10 ;
 	sh:path ficsit:beltRate .
-_:c14n65 sh:datatype xsd:double ;
+_:c14n71 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 5 ;
 	sh:path ficsit:y .
-_:c14n66 sh:class ficsit:GeneratorFuel ;
+_:c14n72 sh:class ficsit:GeneratorFuel ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 1 ;
 	sh:path ficsit:fuels .
-_:c14n67 sh:class ficsit:Source ;
-	sh:description "Sources this record's facts come from." ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:IRI ;
-	sh:order 9 ;
-	sh:path prov:wasDerivedFrom .
-_:c14n68 rdf:first "slugYellow" ;
-	rdf:rest _:c14n122 .
-_:c14n69 sh:datatype xsd:double ;
+_:c14n73 rdf:first "slugYellow" ;
+	rdf:rest _:c14n129 .
+_:c14n74 sh:datatype xsd:double ;
 	sh:description "Item count, or m³ for fluids." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path ficsit:amount .
-_:c14n7 sh:datatype xsd:double ;
-	sh:description "Energy per item, or per m³ for fluids (0 if not a fuel)." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 5 ;
-	sh:path ficsit:energyMJ .
-_:c14n70 sh:datatype xsd:boolean ;
+_:c14n75 sh:datatype xsd:boolean ;
 	sh:description "Raw resource extracted from the world." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 7 ;
 	sh:path ficsit:isResource .
-_:c14n71 sh:datatype xsd:double ;
+_:c14n76 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path ficsit:powerMW .
-_:c14n72 sh:datatype xsd:double ;
+_:c14n77 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path ficsit:durationS .
-_:c14n73 rdf:first rdf:type ;
+_:c14n78 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n74 sh:datatype xsd:boolean ;
+_:c14n79 sh:datatype xsd:boolean ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 7 ;
 	sh:path ficsit:handcraft .
-_:c14n75 rdf:first "pure" ;
+_:c14n8 sh:datatype xsd:string ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 9 ;
+	sh:path ficsit:mamTree .
+_:c14n80 rdf:first "pure" ;
 	rdf:rest rdf:nil .
-_:c14n76 sh:datatype xsd:integer ;
+_:c14n81 sh:datatype xsd:integer ;
 	sh:description "AWESOME Sink points per item (0 if unsinkable)." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path ficsit:sinkPoints .
-_:c14n77 rdf:first "generator" ;
-	rdf:rest _:c14n128 .
-_:c14n78 sh:class ficsit:Item ;
+_:c14n82 rdf:first "generator" ;
+	rdf:rest _:c14n136 .
+_:c14n83 sh:class ficsit:Item ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:item .
-_:c14n79 sh:datatype xsd:double ;
+_:c14n84 sh:datatype xsd:double ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path ficsit:x .
-_:c14n8 rdf:first "production" ;
-	rdf:rest _:c14n26 .
-_:c14n80 sh:class ficsit:Source ;
-	sh:description "Sources this record's facts come from." ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:IRI ;
-	sh:order 8 ;
-	sh:path prov:wasDerivedFrom .
-_:c14n81 sh:datatype xsd:string ;
+_:c14n85 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path schema1:name .
-_:c14n82 rdf:first rdf:type ;
+_:c14n86 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n83 sh:class ficsit:Collectible ;
+_:c14n87 sh:class ficsit:ItemAmount ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 5 ;
+	sh:path ficsit:cost .
+_:c14n88 sh:class ficsit:Collectible ;
 	sh:nodeKind sh:IRI ;
 	sh:order 5 ;
 	sh:path ficsit:collectibles .
-_:c14n84 sh:datatype xsd:string ;
+_:c14n89 sh:datatype xsd:string ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path schema1:name .
-_:c14n85 sh:datatype xsd:boolean ;
+_:c14n9 rdf:first "production" ;
+	rdf:rest _:c14n29 .
+_:c14n90 sh:datatype xsd:boolean ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 9 ;
 	sh:path ficsit:workshop .
-_:c14n86 sh:datatype xsd:integer ;
+_:c14n91 sh:datatype xsd:integer ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 5 ;
 	sh:path ficsit:armSlots .
-_:c14n87 sh:class ficsit:VariablePower ;
+_:c14n92 sh:datatype xsd:integer ;
+	sh:description "Space Elevator phase in which this milestone's tier opens (Satisfactory Wiki, Milestones). Absent for schematics that are not tier milestones." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 4 ;
+	sh:path ficsit:phase .
+_:c14n93 sh:class ficsit:VariablePower ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 10 ;
 	sh:path ficsit:variablePower .
-_:c14n88 sh:class ficsit:Schematic ;
-	sh:nodeKind sh:IRI ;
-	sh:order 7 ;
-	sh:path ficsit:dependsOn .
-_:c14n89 sh:class ficsit:Item ;
+_:c14n94 sh:class ficsit:Item ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:item .
-_:c14n9 rdf:first "alternate" ;
-	rdf:rest _:c14n121 .
-_:c14n90 rdf:first "slugBlue" ;
-	rdf:rest _:c14n68 .
-_:c14n91 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
+_:c14n95 rdf:first "slugBlue" ;
+	rdf:rest _:c14n73 .
+_:c14n96 sh:datatype xsd:double ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 6 ;
+	sh:path ficsit:timeS .
+_:c14n97 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 0 ;
 	sh:path ficsit:id .
-_:c14n92 sh:class ficsit:ItemAmount ;
+_:c14n98 sh:class ficsit:ItemAmount ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 2 ;
 	sh:path ficsit:byproduct .
-_:c14n93 sh:datatype xsd:boolean ;
+_:c14n99 sh:datatype xsd:boolean ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 8 ;
 	sh:path ficsit:buildGun .
-_:c14n94 sh:description "The game's class name, e.g. `Desc_IronPlate_C`." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:IRI ;
-	sh:order 0 ;
-	sh:path ficsit:id .
-_:c14n95 sh:class ficsit:GeneratorSpec ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:BlankNodeOrIRI ;
-	sh:order 9 ;
-	sh:path ficsit:generator .
-_:c14n96 sh:class ficsit:Product ;
-	sh:nodeKind sh:BlankNodeOrIRI ;
-	sh:order 5 ;
-	sh:path ficsit:products .
-_:c14n97 rdf:first "mercerSphere" ;
-	rdf:rest _:c14n21 .
-_:c14n98 rdf:first rdf:type ;
-	rdf:rest rdf:nil .
-_:c14n99 sh:datatype xsd:string ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 8 ;
-	sh:path ficsit:mamTree .
 

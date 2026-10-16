@@ -48,6 +48,7 @@
   },
   "scripts": {
     "gen": "sh scripts/gen.sh",
+    "data:wiki": "tsx src/pipeline/wiki-extract.ts",
     "data:fetch": "tsx src/pipeline/fetch-sources.ts",
     "data:build": "tsx src/pipeline/build-data.ts",
     "data:verify": "tsx src/pipeline/verify-data.ts",

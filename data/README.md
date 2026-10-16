@@ -31,7 +31,18 @@ Pinned by commit SHA in `src/pipeline/sources.ts`, with SHA-256 hashes in
 Every record in `generated/` has `derivedFrom`, the IDs of the sources its
 facts come from. `meta.json` lists those sources with their pinned URLs,
 licences and `retrievedAt` dates. The Satisfactory Wiki (`source-satisfactory-wiki`)
-is cited by the hand-entered items and the Smelter's Somersloop override.
+is cited by the hand-entered items, the Smelter's Somersloop override and item
+`wikiCategories`; each wiki page that supplies `history` or a milestone `phase`
+is its own source, `source-wiki-r<revid>`, with an `oldid` permalink.
+
+## Wiki snapshot
+
+`wiki/snapshot.json` is committed and **generated**: `npm run data:wiki` reads
+the Satisfactory Wiki's API and records, for every page with an item or
+building infobox, its revision, class names, categories and parsed History
+section, plus the Milestones page (tier phases and milestone tables). The
+data build and tests then need no network. Refresh it deliberately and review
+the diff: `npm run data:wiki && npm run data:build && npm run data:verify`.
 
 ## Bumping a source
 

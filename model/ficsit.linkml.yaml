@@ -56,6 +56,8 @@ classes:
       - energyMJ
       - radioactive
       - isResource
+      - wikiCategories
+      - history
       - derivedFrom
 
   ItemAmount:
@@ -100,6 +102,17 @@ classes:
       - minMW
       - maxMW
 
+  HistoryEntry:
+    description: >-
+      One patch's change to an item or building, as the Satisfactory Wiki's
+      History section words it. The wiki is CC BY-NC-SA: any reuse must be
+      non-commercial and share-alike (see NOTICE.md).
+    class_uri: ficsit:HistoryEntry
+    slots:
+      - patch
+      - summary
+      - details
+
   Building:
     description: A factory, extractor, generator or logistics building (`Build_*_C`).
     class_uri: ficsit:Building
@@ -117,6 +130,7 @@ classes:
       - beltRate
       - pipeRate
       - variablePower
+      - history
       - derivedFrom
 
   Footprint:
@@ -155,6 +169,7 @@ classes:
       - name
       - type
       - tier
+      - phase
       - cost
       - timeS
       - unlocks
@@ -448,6 +463,28 @@ slots:
     range: Schematic
     multivalued: true
   mamTree:
+  phase:
+    range: integer
+    description: >-
+      Space Elevator phase in which this milestone's tier opens (Satisfactory
+      Wiki, Milestones). Absent for schematics that are not tier milestones.
+
+  # --- wiki: history and classification ---------------------------------------
+  wikiCategories:
+    multivalued: true
+    description: Satisfactory Wiki categories that classify the item (for example `Crafting components`).
+  history:
+    range: HistoryEntry
+    multivalued: true
+    inlined_as_list: true
+    description: Patch history from the Satisfactory Wiki, newest first.
+  patch:
+    required: true
+    description: Patch ID such as `1.0`, `0.3.4.6` or `Closed Alpha 3`; `unknown` when the wiki names none.
+  summary:
+    description: The change, as the wiki words it (plain text).
+  details:
+    description: Nested bullets, one per line, two spaces of indent per extra level.
 
   # --- world ------------------------------------------------------------------
   resource:

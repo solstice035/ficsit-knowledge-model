@@ -23,6 +23,7 @@ import type {
   ResourceNode,
   Schematic,
   SchematicType,
+  Source,
   Sourced,
 } from '../types.ts';
 import {
@@ -38,7 +39,17 @@ import {
   round,
   str,
 } from './docs.ts';
-import { GAME_VERSION, GENERATED_DIR, RAW_DIR, RETRIEVED_AT, SOURCES, WIKI } from './sources.ts';
+import {
+  GAME_VERSION,
+  GENERATED_DIR,
+  RAW_DIR,
+  RETRIEVED_AT,
+  SOURCES,
+  WIKI,
+  WIKI_SNAPSHOT_PATH,
+  wikiPageSource,
+} from './sources.ts';
+import type { WikiSnapshot } from './wiki.ts';
 
 // ---------------------------------------------------------------------------
 // Inputs
@@ -538,6 +549,62 @@ const collectibles: Collectible[] = readJson<RawCollectible[]>(
 });
 
 // ---------------------------------------------------------------------------
+// Satisfactory Wiki: patch history, categories and tier phases
+//
+// Read from the pinned snapshot (`npm run data:wiki` refreshes it). Each page
+// is cited by a source that pins its revision; categories come from the live
+// category listing, so they cite the unpinned wiki source.
+
+const wikiSnapshot = readJson<WikiSnapshot>(WIKI_SNAPSHOT_PATH);
+const wikiPageSources = new Map<string, Source>();
+/** Extra sources per record, from the wiki. */
+const wikiCites = new Map<string, Set<string>>();
+const cite = (recordId: string, sourceId: string): void => {
+  if (!wikiCites.has(recordId)) wikiCites.set(recordId, new Set());
+  wikiCites.get(recordId)!.add(sourceId);
+};
+const itemById = new Map(items.map((i) => [i.id, i]));
+{
+  for (const page of wikiSnapshot.pages) {
+    const ids = page.classes.flatMap(({ kind, className }) => {
+      // Building infoboxes name the descriptor (`Desc_ConstructorMk1_C`), the model the buildable.
+      const building = buildings.get(className.replace(/^Desc_/, 'Build_'));
+      if (kind === 'building' && building) return [building.id];
+      return itemById.has(className) ? [className] : [];
+    });
+    if (!ids.length) continue;
+    const source = wikiPageSource(page.title, page.revid, wikiSnapshot.retrievedAt);
+    for (const id of ids) {
+      const record = itemById.get(id) ?? buildings.get(id);
+      if (!record) continue;
+      if (page.history.length) {
+        record.history = page.history;
+        wikiPageSources.set(source.id, source);
+        cite(id, source.id);
+      }
+      if (itemById.has(id) && page.categories.length) {
+        const item = itemById.get(id)!;
+        item.wikiCategories = [
+          ...new Set([...(item.wikiCategories ?? []), ...page.categories]),
+        ].sort();
+        cite(id, WIKI.id);
+      }
+    }
+  }
+  const { phases, revid, title } = wikiSnapshot.tierPhases;
+  const source = wikiPageSource(title, revid, wikiSnapshot.retrievedAt);
+  for (const s of schematics) {
+    const phase = s.type === 'milestone' ? phases[s.tier] : undefined;
+    if (phase !== undefined) {
+      s.phase = phase;
+      wikiPageSources.set(source.id, source);
+      cite(s.id, source.id);
+    }
+  }
+}
+const wikiCited = (id: string): string[] => [...(wikiCites.get(id) ?? [])].sort();
+
+// ---------------------------------------------------------------------------
 // Output
 
 const byId = <T extends { id: string }>(a: T, b: T): number => a.id.localeCompare(b.id);
@@ -558,7 +625,9 @@ const docs = (): string[] => [SOURCES.docs.id];
 const buildingList = [...buildings.values()].sort(byId);
 writeRows(
   'items.json',
-  tag(items.sort(byId), (i) => (wikiItems.has(i.id) ? [WIKI.id] : docs())),
+  tag(items.sort(byId), (i) => [
+    ...new Set([...(wikiItems.has(i.id) ? [WIKI.id] : docs()), ...wikiCited(i.id)]),
+  ]),
 );
 writeRows('recipes.json', tag(recipes.sort(byId), docs));
 writeRows(
@@ -567,9 +636,13 @@ writeRows(
     SOURCES.docs.id,
     ...(b.footprint ? [SOURCES.footprints.id] : []),
     ...(b.id in SLOOP_SLOT_OVERRIDES ? [WIKI.id] : []),
+    ...wikiCited(b.id),
   ]),
 );
-writeRows('schematics.json', tag(schematics.sort(byId), docs));
+writeRows(
+  'schematics.json',
+  tag(schematics.sort(byId), (s) => [...docs(), ...wikiCited(s.id)]),
+);
 writeRows(
   'nodes.json',
   tag(nodes.sort(byId), () => [SOURCES.nodes.id]),
@@ -591,13 +664,16 @@ const meta: DataMeta = {
   generatedAt: RETRIEVED_AT,
   gameVersion: GAME_VERSION,
   // Every source a record cites; the cross-check informs no record.
-  sources: [...Object.values(SOURCES).filter((s) => s !== SOURCES.crossCheck), WIKI].map((s) => ({
-    id: s.id,
-    name: s.name,
-    url: s.url,
-    licence: s.licence,
-    retrievedAt: RETRIEVED_AT,
-  })),
+  sources: [
+    ...[...Object.values(SOURCES).filter((s) => s !== SOURCES.crossCheck), WIKI].map((s) => ({
+      id: s.id,
+      name: s.name,
+      url: s.url,
+      licence: s.licence,
+      retrievedAt: RETRIEVED_AT,
+    })),
+    ...[...wikiPageSources.values()].sort((a, b) => a.id.localeCompare(b.id)),
+  ],
   counts,
 };
 writeFileSync(join(GENERATED_DIR, 'meta.json'), `${JSON.stringify(meta, null, 2)}\n`);

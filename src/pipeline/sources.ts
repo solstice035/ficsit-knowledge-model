@@ -4,11 +4,15 @@
  * Ported from the FICSIT Field Guide data pipeline (see data/README.md).
  */
 import { fileURLToPath } from 'node:url';
+import type { Source } from '../types.ts';
 
 export const RAW_DIR = fileURLToPath(new URL('../../data/raw/', import.meta.url));
 /** Committed SHA-256 hashes of every raw source (`npm run data:fetch` checks them). */
 export const LOCK_PATH = fileURLToPath(new URL('../../data/sources.lock.json', import.meta.url));
 export const GENERATED_DIR = fileURLToPath(new URL('../../data/generated/', import.meta.url));
+/** Pinned Satisfactory Wiki revisions (committed; refreshed by `npm run data:wiki`). */
+export const WIKI_SNAPSHOT_DIR = fileURLToPath(new URL('../../data/wiki/', import.meta.url));
+export const WIKI_SNAPSHOT_PATH = `${WIKI_SNAPSHOT_DIR}snapshot.json`;
 
 /**
  * When the pinned revisions below were chosen and fetched. Written to meta.json
@@ -26,7 +30,7 @@ const TOOLS_SHA = 'a1eb2fef1d5293baa5cd33ae88d08032600c6996';
 const logistics = (path: string): string =>
   `https://raw.githubusercontent.com/rockfactory/satisfactory-logistics/${LOGISTICS_SHA}/${path}`;
 
-export interface Source {
+export interface PipelineSource {
   /** Stable ID that records cite in `derivedFrom`, e.g. `source-docs-en`. */
   id: string;
   /** Local file name inside `data/raw/`. */
@@ -72,7 +76,7 @@ export const SOURCES = {
     name: 'greeny/SatisfactoryTools data1.0.json (cross-check only)',
     licence: 'MIT',
   },
-} as const satisfies Record<string, Source>;
+} as const satisfies Record<string, PipelineSource>;
 
 /**
  * Facts the Docs don't export, entered by hand from the Satisfactory Wiki
@@ -85,3 +89,18 @@ export const WIKI = {
   name: 'Satisfactory Wiki',
   licence: 'CC BY-NC-SA',
 } as const;
+
+/**
+ * A wiki page pinned to one revision: the `oldid` permalink never changes, so
+ * records that cite it can be checked against exactly the text they came from.
+ */
+export function wikiPageSource(title: string, revid: number, retrievedAt: string): Source {
+  const page = encodeURIComponent(title.replace(/ /g, '_'));
+  return {
+    id: `source-wiki-r${revid}`,
+    name: `Satisfactory Wiki: ${title} (revision ${revid})`,
+    url: `https://satisfactory.wiki.gg/index.php?title=${page}&oldid=${revid}`,
+    licence: WIKI.licence,
+    retrievedAt,
+  };
+}

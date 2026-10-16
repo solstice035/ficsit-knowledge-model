@@ -41,6 +41,13 @@
 --     * Slot: id
 --     * Slot: minMW
 --     * Slot: maxMW
+-- # Class: HistoryEntry Description: One patch's change to an item or building, as the Satisfactory Wiki's History section words it. The wiki is CC BY-NC-SA: any reuse must be non-commercial and share-alike (see NOTICE.md).
+--     * Slot: id
+--     * Slot: patch Description: Patch ID such as `1.0`, `0.3.4.6` or `Closed Alpha 3`; `unknown` when the wiki names none.
+--     * Slot: summary Description: The change, as the wiki words it (plain text).
+--     * Slot: details Description: Nested bullets, one per line, two spaces of indent per extra level.
+--     * Slot: Item_id Description: Autocreated FK slot
+--     * Slot: Building_id Description: Autocreated FK slot
 -- # Class: Building Description: A factory, extractor, generator or logistics building (`Build_*_C`).
 --     * Slot: id Description: The game's class name, e.g. `Desc_IronPlate_C`.
 --     * Slot: name
@@ -78,6 +85,7 @@
 --     * Slot: name
 --     * Slot: type Description: Kind of schematic, node or collectible (range set per class).
 --     * Slot: tier
+--     * Slot: phase Description: Space Elevator phase in which this milestone's tier opens (Satisfactory Wiki, Milestones). Absent for schematics that are not tier milestones.
 --     * Slot: timeS
 --     * Slot: mamTree
 --     * Slot: GameData_id Description: Autocreated FK slot
@@ -109,6 +117,9 @@
 --     * Slot: licence Description: Licence of the source, as stated by its publisher.
 --     * Slot: retrievedAt Description: Date the input bundle was built from this source.
 --     * Slot: GameData_id Description: Autocreated FK slot
+-- # Class: Item_wikiCategories
+--     * Slot: Item_id Description: Autocreated FK slot
+--     * Slot: wikiCategories Description: Satisfactory Wiki categories that classify the item (for example `Crafting components`).
 -- # Class: Item_derivedFrom
 --     * Slot: Item_id Description: Autocreated FK slot
 --     * Slot: derivedFrom_id Description: Sources this record's facts come from.
@@ -254,6 +265,7 @@ CREATE TABLE "Schematic" (
 	name TEXT,
 	type VARCHAR(13) NOT NULL,
 	tier INTEGER NOT NULL,
+	phase INTEGER,
 	"timeS" FLOAT,
 	"mamTree" TEXT,
 	"GameData_id" INTEGER,
@@ -343,6 +355,19 @@ CREATE TABLE "Product" (
 );
 CREATE INDEX "ix_Product_id" ON "Product" (id);
 
+CREATE TABLE "HistoryEntry" (
+	id INTEGER NOT NULL,
+	patch TEXT NOT NULL,
+	summary TEXT,
+	details TEXT,
+	"Item_id" TEXT,
+	"Building_id" TEXT,
+	PRIMARY KEY (id),
+	FOREIGN KEY("Item_id") REFERENCES "Item" (id),
+	FOREIGN KEY("Building_id") REFERENCES "Building" (id)
+);
+CREATE INDEX "ix_HistoryEntry_id" ON "HistoryEntry" (id);
+
 CREATE TABLE "ResourceNode" (
 	id TEXT NOT NULL,
 	resource TEXT NOT NULL,
@@ -357,6 +382,15 @@ CREATE TABLE "ResourceNode" (
 	FOREIGN KEY("GameData_id") REFERENCES "GameData" (id)
 );
 CREATE INDEX "ix_ResourceNode_id" ON "ResourceNode" (id);
+
+CREATE TABLE "Item_wikiCategories" (
+	"Item_id" TEXT,
+	"wikiCategories" TEXT,
+	PRIMARY KEY ("Item_id", "wikiCategories"),
+	FOREIGN KEY("Item_id") REFERENCES "Item" (id)
+);
+CREATE INDEX "ix_Item_wikiCategories_Item_id" ON "Item_wikiCategories" ("Item_id");
+CREATE INDEX "ix_Item_wikiCategories_wikiCategories" ON "Item_wikiCategories" ("wikiCategories");
 
 CREATE TABLE "Item_derivedFrom" (
 	"Item_id" TEXT,

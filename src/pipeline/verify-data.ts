@@ -7,7 +7,8 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Building, Collectible, Item, Recipe, Schematic } from '../types.ts';
-import { GENERATED_DIR, RAW_DIR, SOURCES } from './sources.ts';
+import { GENERATED_DIR, RAW_DIR, SOURCES, WIKI_SNAPSHOT_PATH } from './sources.ts';
+import type { WikiSnapshot } from './wiki.ts';
 
 interface ToolsRecipe {
   className: string;
@@ -58,6 +59,10 @@ const KNOWN_ONLY_OURS: Record<string, string> = Object.fromEntries(
   ].map((id) => [id, FICSMAS]),
 );
 
+/** Milestones where the wiki and the Docs disagree, with the reason. Add an entry, never silence. */
+const KNOWN_WIKI_MILESTONE_DIFFERENCES: Record<string, string> = {};
+
+const itemIds0 = new Set(items.map((i) => i.id));
 const key = (list: { item: string; amount: number }[]): string =>
   list
     .map((x) => `${x.item}×${x.amount}`)
@@ -136,6 +141,52 @@ for (const theirs of Object.values(tools.recipes)) {
   }
 }
 
+// Milestones: the Satisfactory Wiki's tables against the Docs (names, costs, research times).
+const wiki = load<WikiSnapshot>(WIKI_SNAPSHOT_PATH);
+const itemIdByName = new Map(items.map((i) => [i.name.toLowerCase(), i.id]));
+// The wiki writes the singular where the game says "Screws".
+itemIdByName.set('screw', 'Desc_IronScrew_C');
+let milestonesCompared = 0;
+for (const m of wiki.milestones.filter((x) => x.tier >= 1)) {
+  const sch = schematics.find(
+    (s) =>
+      s.type === 'milestone' && s.tier === m.tier && s.name.toLowerCase() === m.name.toLowerCase(),
+  );
+  if (!sch) {
+    problems.push(`wiki milestone "${m.name}" (tier ${m.tier}) is not in schematics.json`);
+    continue;
+  }
+  milestonesCompared += 1;
+  const ours = key(sch.cost);
+  const theirs = key(
+    m.cost.map((c) => ({
+      item: itemIdByName.get(c.item.toLowerCase()) ?? `?${c.item}`,
+      amount: c.amount,
+    })),
+  );
+  const diffs: string[] = [];
+  if (ours !== theirs) diffs.push(`cost [${ours}] vs wiki [${theirs}]`);
+  if (sch.timeS !== m.timeS) diffs.push(`time ${sch.timeS}s vs wiki ${m.timeS}s`);
+  if (diffs.length) {
+    const reason = KNOWN_WIKI_MILESTONE_DIFFERENCES[sch.id];
+    (reason ? notes : problems).push(
+      `${sch.id} (${sch.name}): ${diffs.join('; ')}${reason ? ` (known: ${reason})` : ''}`,
+    );
+  }
+}
+const unresolvedWikiClasses = wiki.pages.flatMap((p) =>
+  p.classes
+    .filter(({ kind, className }) =>
+      kind === 'building'
+        ? !buildingIds.has(className.replace(/^Desc_/, 'Build_'))
+        : !itemIds0.has(className),
+    )
+    .map((c) => `${p.title}: ${c.className}`),
+);
+notes.push(
+  `${unresolvedWikiClasses.length} wiki infobox classes name something not in this model (for example building variants); they are skipped`,
+);
+
 // World totals as of 1.0 (Satisfactory Wiki).
 const EXPECTED_COLLECTIBLES: Record<string, number> = {
   mercerSphere: 298,
@@ -163,6 +214,7 @@ for (const c of collectibles)
 for (const id of missing) problems.push(`referenced item missing from items.json: ${id}`);
 
 process.stdout.write(`Compared ${compared} machine recipes against SatisfactoryTools 1.0.\n`);
+process.stdout.write(`Compared ${milestonesCompared} milestones against the Satisfactory Wiki.\n`);
 for (const n of notes) process.stdout.write(`  note: ${n}\n`);
 if (problems.length) {
   for (const p of problems) process.stdout.write(`  ✗ ${p}\n`);

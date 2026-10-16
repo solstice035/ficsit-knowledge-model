@@ -177,8 +177,10 @@ describe('provenance', () => {
   it('every source has a pinned URL, a licence and a retrieval date', () => {
     for (const s of data.sources) {
       expect(s.url).toMatch(/^https:\/\//);
-      // Files are pinned to a 40-character commit SHA; wiki facts aren't yet (README.md).
-      if (s.id !== 'source-satisfactory-wiki') expect(s.url).toMatch(/\/[0-9a-f]{40}\//);
+      // Files are pinned to a 40-character commit SHA; wiki pages to an `oldid` revision.
+      // Only the general wiki source (hand-entered facts, live categories) is unpinned.
+      if (s.id.startsWith('source-wiki-r')) expect(s.url).toMatch(/[?&]oldid=\d+$/);
+      else if (s.id !== 'source-satisfactory-wiki') expect(s.url).toMatch(/\/[0-9a-f]{40}\//);
       expect(s.licence).not.toBe('');
       expect(s.retrievedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
@@ -212,11 +214,20 @@ describe('provenance', () => {
   it('Q6 records with non-commercial facts', () => {
     const sql = runSql(db, 'q6-non-commercial-records');
     expectSameRows(sql, runSparql(store, 'q6-non-commercial-records'));
-    expect(sql.map((r) => r.record)).toEqual([
-      'Build_SmelterMk1_C',
-      'Desc_HardDrive_C',
-      'Desc_ResourceSinkCoupon_C',
-    ]);
+    // Every record that cites a non-commercial source: the hand-entered wiki facts, plus
+    // everything carrying wiki patch history, categories or a tier phase.
+    const nc = new Set(data.sources.filter((s) => s.licence.includes('NC')).map((s) => s.id));
+    const expected = new Set(
+      [...data.items, ...data.buildings, ...data.schematics]
+        .filter((r) => r.derivedFrom.some((s) => nc.has(s)))
+        .map((r) => r.id),
+    );
+    expect(new Set(sql.map((r) => r.record))).toEqual(expected);
+    expect(expected).toContain('Build_SmelterMk1_C');
+    expect(expected).toContain('Desc_HardDrive_C');
+    expect(expected).toContain('Desc_IronPlate_C');
+    // Docs-only records stay out.
+    expect(expected).not.toContain('Recipe_IronPlate_C');
   });
 });
 
